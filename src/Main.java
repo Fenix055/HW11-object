@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class Main {
     /// Task 1
-    public static boolean leapYear (int year){
+    public static void leapYear (int year){
         if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)){
-            return true;
+            System.out.println(year + " год — високосный год");
         }else {
-            return false;
+            System.out.println(year + " год — невисокосный год");
         }
     }
 
@@ -18,7 +20,7 @@ public class Main {
         } else {
             systemName = "Android";
         }
-        if (year < 2015){
+        if (year < LocalDate.now().getYear()){
             version = "облегченную";
         } else {
             version = "обычную";
@@ -27,24 +29,28 @@ public class Main {
     }
 
     /// Task 3
-    public static int deliveryDays (int distance){
-        return ((distance-20) / 40) + 1;
-
+    public static byte deliveryDays (int distance){
+        if (distance > 100){
+            System.out.println("Свыше 100 км доставки нет.");
+            return 0;
+        } else if (distance<20) {
+            return 1;
+        } else if (distance<60) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 
     public static void main(String[] args) {
         /// Task 1
-        int year = 1994;
-        if (leapYear(year)){
-            System.out.println(year + " год — високосный год");
-        }else {
-            System.out.println(year + " год — невисокосный год");
-        }
+        leapYear(1994);
 
         /// Task 2
-        deviceCheck(0, 2015);
+        deviceCheck(0, 2020);
 
         /// Task 3
-        System.out.println(deliveryDays(60) + " дня доставки");
+        short deliveryDistance = 95;
+        System.out.println("Потребуется дней: " + deliveryDays(deliveryDistance));
     }
 }
